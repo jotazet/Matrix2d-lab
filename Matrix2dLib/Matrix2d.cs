@@ -112,8 +112,6 @@ public class Matrix2d : IEquatable<Matrix2d>
 
     public Matrix2d Transpose(Matrix2d A)
     {
-        if (A == null)
-            throw new ArgumentNullException();
         return new Matrix2d(A.a, A.c, A.b, A.d);
     }
 
@@ -124,8 +122,6 @@ public class Matrix2d : IEquatable<Matrix2d>
 
     public int Determinant(Matrix2d A)
     {
-        if (A == null)
-            throw new ArgumentNullException();
         return A.a * A.d - A.b * A.c;
     }
     #endregion

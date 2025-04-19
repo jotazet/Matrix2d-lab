@@ -226,5 +226,244 @@ namespace Matrix2dTest
             // Assert
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 5, 6, 7, 8, 6, 8, 10, 12)]
+        [DataRow(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1)]
+        [DataRow(-1, -2, -3, -4, 1, 2, 3, 4, 0, 0, 0, 0)]
+        public void OperatorDodawania_Macierze_Ok(
+            int a1, int b1, int c1, int d1,
+            int a2, int b2, int c2, int d2,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var m1 = new Matrix2d(a1, b1, c1, d1);
+            var m2 = new Matrix2d(a2, b2, c2, d2);
+
+            // Act
+            var result = m1 + m2;
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 5, 6, 7, 8, -4, -4, -4, -4)]
+        [DataRow(0, 0, 0, 0, 1, 1, 1, 1, -1, -1, -1, -1)]
+        [DataRow(-1, -2, -3, -4, 1, 2, 3, 4, -2, -4, -6, -8)]
+        public void OperatorOdejmowania_Macierze_Ok(
+            int a1, int b1, int c1, int d1,
+            int a2, int b2, int c2, int d2,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var m1 = new Matrix2d(a1, b1, c1, d1);
+            var m2 = new Matrix2d(a2, b2, c2, d2);
+
+            // Act
+            var result = m1 - m2;
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 5, 6, 7, 8, 19, 22, 43, 50)]
+        [DataRow(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)]
+        [DataRow(1, 0, 0, 1, 1, 2, 3, 4, 1, 2, 3, 4)]
+        public void OperatorMnozenia_Macierze_Ok(
+            int a1, int b1, int c1, int d1,
+            int a2, int b2, int c2, int d2,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var m1 = new Matrix2d(a1, b1, c1, d1);
+            var m2 = new Matrix2d(a2, b2, c2, d2);
+
+            // Act
+            var result = m1 * m2;
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 2, 2, 4, 6, 8)]
+        [DataRow(0, 0, 0, 0, 5, 0, 0, 0, 0)]
+        [DataRow(-1, -2, -3, -4, 3, -3, -6, -9, -12)]
+        public void OperatorMnozenia_MacierzPrzezSkalar_Ok(
+            int a, int b, int c, int d,
+            int scalar,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var m = new Matrix2d(a, b, c, d);
+
+            // Act
+            var result = m * scalar;
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+
+        [TestMethod]
+        [DataRow(2, 1, 2, 3, 4, 2, 4, 6, 8)]
+        [DataRow(0, 1, 2, 3, 4, 0, 0, 0, 0)]
+        [DataRow(-1, 1, 2, 3, 4, -1, -2, -3, -4)]
+        public void OperatorMnozenia_SkalarMacierz_Ok(
+            int scalar, int a, int b, int c, int d,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var matrix = new Matrix2d(a, b, c, d);
+
+            // Act
+            var result = scalar * matrix;
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, -1, -2, -3, -4)]
+        [DataRow(0, 0, 0, 0, 0, 0, 0, 0)]
+        [DataRow(-1, -2, -3, -4, 1, 2, 3, 4)]
+        public void OperatorNegacji_Macierz_Ok(
+            int a, int b, int c, int d,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var matrix = new Matrix2d(a, b, c, d);
+
+            // Act
+            var result = -matrix;
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 1, 3, 2, 4)]
+        [DataRow(0, 0, 0, 0, 0, 0, 0, 0)]
+        [DataRow(-1, -2, -3, -4, -1, -3, -2, -4)]
+        public void Transpose_Macierz_Ok(
+            int a, int b, int c, int d,
+            int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Arrange
+            var matrix = new Matrix2d(a, b, c, d);
+
+            // Act
+            var result = matrix.Transpose(matrix);
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, -2)]
+        [DataRow(0, 0, 0, 0, 0)]
+        [DataRow(2, 3, 4, 5, -2)]
+        public void Det_Macierz_Ok(int a, int b, int c, int d, int expectedDet)
+        {
+            // Arrange
+            var matrix = new Matrix2d(a, b, c, d);
+
+            // Act
+            var result = matrix.Det();
+
+            // Assert
+            Assert.AreEqual(expectedDet, result);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, -2)]
+        [DataRow(0, 0, 0, 0, 0)]
+        [DataRow(2, 3, 4, 5, -2)]
+        public void Determinant_Macierz_Ok(int a, int b, int c, int d, int expectedDet)
+        {
+            // Arrange
+            var matrix = new Matrix2d(a, b, c, d);
+
+            // Act
+            var result = matrix.Determinant(matrix);
+
+            // Assert
+            Assert.AreEqual(expectedDet, result);
+        }
+
+        [TestMethod]
+        [DataRow("[[1, 2], [3, 4]]", 1, 2, 3, 4)]
+        [DataRow("[[0, 0], [0, 0]]", 0, 0, 0, 0)]
+        [DataRow("[[-1, -2], [-3, -4]]", -1, -2, -3, -4)]
+        [DataRow("[[123, 456], [789, 1011]]", 123, 456, 789, 1011)]
+        [DataRow("[[10, 20], [30, 40]]", 10, 20, 30, 40)]
+        public void Parse_PoprawnyFormat_Ok(string input, int expectedA, int expectedB, int expectedC, int expectedD)
+        {
+            // Act
+            var result = Matrix2d.Parse(input);
+
+            // Assert
+            Assert.AreEqual(expectedA, result.A);
+            Assert.AreEqual(expectedB, result.B);
+            Assert.AreEqual(expectedC, result.C);
+            Assert.AreEqual(expectedD, result.D);
+        }
+
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("")]
+        [DataRow(" ")]
+        public void Parse_NullLubPusty_ThrowFormatException(string input)
+        {
+            // Act + Assert
+            Assert.ThrowsException<FormatException>(() => Matrix2d.Parse(input));
+        }
+
+        [TestMethod]
+        [DataRow("[1, 2], [3, 4]]")]
+        [DataRow("[[1, 2], [3, 4]")]
+        [DataRow("[[1, 2] [3, 4]]")]
+        [DataRow("[[1, 2, 3], [4, 5, 6]]")]
+        [DataRow("[[1], [2]]")]
+        [DataRow("[[a, b], [c, d]]")]
+        public void Parse_NieprawidlowyFormat_ThrowFormatException(string input)
+        {
+            // Act + Assert
+            Assert.ThrowsException<FormatException>(() => Matrix2d.Parse(input));
+        }
+
+        [TestMethod]
+        public void Transpose_Null_NullReferenceException()
+        {
+            // Arrange
+            Matrix2d matrix = null;
+
+            // Act & Assert
+            Assert.ThrowsException<NullReferenceException>(() => matrix.Transpose(matrix));
+        }
     }
+
 }
