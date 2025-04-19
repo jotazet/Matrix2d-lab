@@ -464,6 +464,57 @@ namespace Matrix2dTest
             // Act & Assert
             Assert.ThrowsException<NullReferenceException>(() => matrix.Transpose(matrix));
         }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4)]
+        [DataRow(0, 0, 0, 0)]
+        [DataRow(-1, -2, -3, -4)]
+        [DataRow(123, 456, 789, 1011)]
+        [DataRow(10, 20, 30, 40)]
+        public void KonwersjaJawna_Matrix2dDoTablicyInt_Ok(int a, int b, int c, int d)
+        {
+            // Arrange
+            var matrix = new Matrix2d(a, b, c, d);
+
+            // Act
+            var array = (int[,])matrix;
+
+            // Assert
+            Assert.AreEqual(a, array[0, 0]);
+            Assert.AreEqual(b, array[0, 1]);
+            Assert.AreEqual(c, array[1, 0]);
+            Assert.AreEqual(d, array[1, 1]);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4)]
+        [DataRow(0, 0, 0, 0)]
+        [DataRow(-1, -2, -3, -4)]
+        [DataRow(123, 456, 789, 1011)]
+        [DataRow(10, 20, 30, 40)]
+        public void KonwersjaNiejawna_TablicaIntDoMatrix2d_Ok(int a, int b, int c, int d)
+        {
+            // Arrange
+            var array = new int[,] { { a, b }, { c, d } };
+
+            // Act
+            Matrix2d matrix = array;
+
+            // Assert
+            Assert.AreEqual(a, matrix.A);
+            Assert.AreEqual(b, matrix.B);
+            Assert.AreEqual(c, matrix.C);
+            Assert.AreEqual(d, matrix.D);
+        }
+
+        [TestMethod]
+        public void KonwersjaJawna_TablicaIntDoMatrix2d_NullReferenceException()
+        {
+            // Arrange
+            int[,] array = null;
+            // Act & Assert
+            Assert.ThrowsException<NullReferenceException>(() => (Matrix2d)array);
+        }
     }
 
 }
